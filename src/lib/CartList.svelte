@@ -87,7 +87,7 @@
                     animate:flip
                 >
                     <div class="flex gap-4">
-                        <img src={image} alt={title} class="w-16 h-fit" />
+                        <img src={image} alt={title} class="w-16 h-min" />
                         <div>
                             <h5 class="font-secondary">{title}</h5>
                             <p>${price * amount}</p>
