@@ -55,7 +55,7 @@
     transition:fade={{ duration: 300 }}
 >
     <div
-        class="fixed top-0 right-0 bg-white min-w-[400px] sm:min-w-[450px] h-full flex flex-col p-6 gap-6"
+        class="fixed top-0 right-0 bg-white w-[350px] sm:w-[450px] h-full flex flex-col p-6 gap-6"
         transition:fly={{ x: 100, duration: 500 }}
     >
         <div class="relative">
