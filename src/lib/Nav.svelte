@@ -80,7 +80,7 @@
 
         <h1 class="font-secondary text-3xl text-center">Razors</h1>
 
-        <div class="flex items-center gap-5 justify-self-end pt-2">
+        <div class="flex items-center gap-2 xs:gap-5 justify-self-end pt-2">
             <a
                 sveltekit:prefetch
                 href="/login"

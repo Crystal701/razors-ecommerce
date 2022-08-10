@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       fontFamily: {
         secondary: "Libre Baskerville"
+      },
+      screens: {
+        "xs": "500px"
       }
     },
   },
