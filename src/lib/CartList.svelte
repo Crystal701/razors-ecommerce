@@ -91,7 +91,7 @@
                         <img src={image} alt={title} class="w-16 h-16" />
                         <div>
                             <h5 class="font-secondary">{title}</h5>
-                            <p>${price * amount}</p>
+                            <p>${(price * amount).toFixed(2)}</p>
                             <button
                                 class="text-sm text-red-500"
                                 on:click={() => deleteItem(id)}>remove</button
