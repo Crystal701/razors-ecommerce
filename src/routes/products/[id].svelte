@@ -47,16 +47,12 @@
                 }
             });
 
-            cartList.update(() => {
-                return updatedData;
-            });
+            cartList.update(() => updatedData);
         } else {
             const amount = 1;
             updatedData = { id, title, price, image, amount };
 
-            cartList.update((currentData) => {
-                return [...currentData, updatedData];
-            });
+            cartList.update((currentData) => [...currentData, updatedData]);
         }
 
         isCart = true;

@@ -2,6 +2,13 @@
     import { fade, fly } from "svelte/transition";
     import { flip } from "svelte/animate";
     import { cartList } from "../stores/cart.js";
+    import { loggedinUser } from "../stores/loggedIn";
+
+    let isLogin = false;
+
+    for (let client of $loggedinUser) {
+        isLogin = client.isLogin || false;
+    }
 
     $: totalPrice = $cartList.reduce(
         (acc, cur) => acc + cur.price * cur.amount,
@@ -9,9 +16,7 @@
     );
 
     const deleteItem = (id) => {
-        cartList.update((items) => {
-            return items.filter((item) => item.id !== id);
-        });
+        cartList.update((items) => items.filter((item) => item.id !== id));
     };
 
     const addAmount = (id) => {
@@ -24,9 +29,7 @@
             }
         });
 
-        cartList.update(() => {
-            return updatedData;
-        });
+        cartList.update(() => updatedData);
     };
 
     const reduceAmount = (id, amount) => {
@@ -43,9 +46,7 @@
             }
         });
 
-        cartList.update(() => {
-            return updatedData;
-        });
+        cartList.update(() => updatedData);
     };
 </script>
 
@@ -141,15 +142,25 @@
             {/each}
         </div>
 
-        <div class="text-center mt-6 bottom-0">
+        <div class="flex flex-col text-center my-6 bottom-0">
             <p class="text-xl mb-4">Total: ${totalPrice.toFixed(2)}</p>
-            <p class="font-light">
-                Please <a
-                    href="/login"
-                    class="uppercase text-[#ba9761] hover:underline">login</a
+
+            {#if !isLogin}
+                <p class="font-light">
+                    Please <a
+                        href="/login"
+                        class="uppercase text-[#ba9761] hover:underline"
+                        on:click>login</a
+                    >
+                    to checkout
+                </p>
+            {:else}
+                <a
+                    href="/checkout"
+                    class="button sm:text-sm hover:bg-[#ba9761] hover:text-white"
+                    on:click>Checkout</a
                 >
-                to checkout
-            </p>
+            {/if}
         </div>
     </div>
 </div>
