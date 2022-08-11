@@ -23,7 +23,6 @@
             isRegistered = true;
         }
     };
-    console.log($users);
 </script>
 
 <div
@@ -41,7 +40,7 @@
             <input
                 type="email"
                 id="email"
-                class="border-b-2 p-2 focus:outline-none focus:border-[#ba9761]"
+                class="border-b-2 p-1 focus:outline-none focus:border-[#ba9761]"
                 bind:value={email}
                 required
             />
@@ -50,7 +49,7 @@
             <input
                 type="password"
                 id="password"
-                class="border-b-2 p-2 focus:outline-none focus:border-[#ba9761]"
+                class="border-b-2 p-1 focus:outline-none focus:border-[#ba9761]"
                 bind:value={password}
                 minlength="8"
                 required
@@ -60,16 +59,15 @@
             <input
                 type="text"
                 id="username"
-                class="border-b-2 p-2 focus:outline-none focus:border-[#ba9761]"
+                class="border-b-2 p-1 focus:outline-none focus:border-[#ba9761]"
                 bind:value={username}
                 required
             />
 
-            <button
-                class="button sm:text-sm hover:bg-[#ba9761] hover:text-white"
+            <button class="button hover:bg-[#ba9761] hover:text-white"
                 >submit</button
             >
-            <p class="font-extralight text-sm text-center">
+            <p class="font-light text-sm text-center">
                 Already have an account? <span
                     class="text-[#ba9761] font-normal hover:underline hover:cursor-pointer"
                     on:click>Log in here</span

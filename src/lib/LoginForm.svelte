@@ -87,7 +87,7 @@
             <input
                 type="email"
                 id="email"
-                class="border-b-2 p-2 focus:outline-none focus:border-[#ba9761]"
+                class="border-b-2 p-1 focus:outline-none focus:border-[#ba9761]"
                 bind:value={email}
                 required
             />
@@ -96,17 +96,16 @@
             <input
                 type="password"
                 id="password"
-                class="border-b-2 p-2 focus:outline-none focus:border-[#ba9761]"
+                class="border-b-2 p-1 focus:outline-none focus:border-[#ba9761]"
                 bind:value={password}
                 required
             />
             <p class="text-red-500">{errorMsg}</p>
 
-            <button
-                class="button sm:text-sm hover:bg-[#ba9761] hover:text-white"
+            <button class="button hover:bg-[#ba9761] hover:text-white"
                 >submit</button
             >
-            <p class="font-extralight text-sm text-center">
+            <p class="font-light text-sm text-center">
                 Don't have an account? <span
                     class="text-[#ba9761] font-normal hover:underline hover:cursor-pointer"
                     on:click>Register here</span
@@ -123,7 +122,7 @@
             <div class="flex flex-col items-center gap-2">
                 <a
                     href="/checkout"
-                    class="button sm:text-sm hover:bg-[#ba9761] hover:text-white"
+                    class="button hover:bg-[#ba9761] hover:text-white"
                     >Checkout</a
                 >
                 <span

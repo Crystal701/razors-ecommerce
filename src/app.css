@@ -17,5 +17,5 @@
 }
 
 .button {
-    @apply uppercase bg-[#e6dbca] py-2 px-4 text-xs transition duration-300
+    @apply uppercase bg-[#e6dbca] py-2 px-4 transition duration-300
 }

@@ -62,9 +62,7 @@
 <div
     class="flex flex-col justify-center w-full max-w-[1300px] px-4 sm:px-6 md:px-12 m-auto my-10 gap-3 lg:gap-10"
 >
-    <a
-        href="/products"
-        class="button w-fit sm:text-sm hover:bg-[#ba9761] hover:text-white"
+    <a href="/products" class="button w-fit hover:bg-[#ba9761] hover:text-white"
         >back to products</a
     >
 
@@ -78,7 +76,7 @@
             <p class="font-semibold text-[#ba9761] text-xl">${price}</p>
             <p class="text-justify font-extralight">{description}</p>
             <button
-                class="button sm:text-sm hover:bg-[#ba9761] hover:text-white"
+                class="button hover:bg-[#ba9761] hover:text-white"
                 on:click={() => addToCart(id, title, price, image.url)}
                 >add to cart</button
             >
