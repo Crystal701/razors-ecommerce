@@ -157,7 +157,7 @@
             {:else}
                 <a
                     href="/checkout"
-                    class="button sm:text-sm hover:bg-[#ba9761] hover:text-white"
+                    class="button hover:bg-[#ba9761] hover:text-white"
                     on:click>Checkout</a
                 >
             {/if}
