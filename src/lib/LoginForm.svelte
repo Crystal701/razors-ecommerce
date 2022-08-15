@@ -1,5 +1,5 @@
 <script>
-    import { fade } from "svelte/transition";
+    import SubmissionCard from "./SubmissionCard.svelte";
     import { users } from "../stores/users.js";
     import { loggedinUser } from "../stores/loggedIn.js";
 
@@ -9,7 +9,7 @@
     let isLogin = false;
 
     for (let client of $loggedinUser) {
-        isLogin = client.isLogin || false;
+        isLogin = client.isLogin;
     }
 
     const handleSubmit = () => {
@@ -72,16 +72,11 @@
     };
 </script>
 
-<div
-    class="flex flex-col items-center w-full px-4 sm:px-6 md:px-12 py-10 my-10"
-    in:fade|local
->
-    {#if !isLogin}
-        <h3 class="font-secondary text-2xl text-center">Sign In</h3>
-
+{#if !isLogin}
+    <SubmissionCard title={"Sign In"}>
         <form
             on:submit|preventDefault={handleSubmit}
-            class="w-full max-w-[700px] flex flex-col shadow-md p-10 m-5 border-t-4 border-[#ba9761] gap-3"
+            class="flex flex-col gap-3"
         >
             <label for="email" class="font-extralight">Email</label>
             <input
@@ -112,24 +107,20 @@
                 >
             </p>
         </form>
-    {:else}
-        <div
-            class="w-full max-w-[700px] flex flex-col shadow-md p-10 m-5 border-t-4 border-[#ba9761] gap-8 text-center"
-            in:fade|local
-        >
-            <p class="text-[#ba9761] text-2xl">You're logged in.</p>
+    </SubmissionCard>
+{:else}
+    <SubmissionCard>
+        <p class="text-[#ba9761] text-2xl text-center">You're logged in.</p>
 
-            <div class="flex flex-col items-center gap-2">
-                <a
-                    href="/checkout"
-                    class="button hover:bg-[#ba9761] hover:text-white"
-                    >Checkout</a
-                >
-                <span
-                    class="text-sm font-extralight hover:underline hover:cursor-pointer"
-                    on:click={handleLogout}>Log out</span
-                >
-            </div>
+        <div class="flex flex-col items-center gap-2">
+            <a
+                href="/checkout"
+                class="button hover:bg-[#ba9761] hover:text-white">Checkout</a
+            >
+            <span
+                class="text-sm font-extralight hover:underline hover:cursor-pointer"
+                on:click={handleLogout}>Log out</span
+            >
         </div>
-    {/if}
-</div>
+    </SubmissionCard>
+{/if}

@@ -1,5 +1,5 @@
 <script>
-    import { fade } from "svelte/transition";
+    import SubmissionCard from "./SubmissionCard.svelte";
     import { users } from "../stores/users.js";
 
     let email = "";
@@ -25,16 +25,11 @@
     };
 </script>
 
-<div
-    class="flex flex-col items-center w-full px-4 sm:px-6 md:px-12 py-10 my-10"
-    in:fade|local
->
-    {#if !isRegistered}
-        <h3 class="font-secondary text-2xl text-center">Register</h3>
-
+{#if !isRegistered}
+    <SubmissionCard title={"Register"}>
         <form
             on:submit|preventDefault={handleSubmit}
-            class="w-full max-w-[700px] flex flex-col shadow-md p-10 m-5 border-t-4 border-[#ba9761] gap-3"
+            class="flex flex-col gap-3"
         >
             <label for="email" class="font-extralight">Email</label>
             <input
@@ -74,11 +69,10 @@
                 >
             </p>
         </form>
-    {:else if isRegistered}
-        <div
-            class="w-full max-w-[700px] flex flex-col shadow-md p-10 m-5 border-t-4 border-[#ba9761] gap-8 text-center"
-            in:fade|local
-        >
+    </SubmissionCard>
+{:else if isRegistered}
+    <SubmissionCard>
+        <div class="flex flex-col items-center gap-8">
             <p class="text-[#ba9761] text-2xl">You're registered.</p>
 
             <p class="font-extralight">
@@ -89,5 +83,5 @@
                 >
             </p>
         </div>
-    {/if}
-</div>
+    </SubmissionCard>
+{/if}

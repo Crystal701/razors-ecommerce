@@ -7,13 +7,12 @@
     let isLogin = false;
 
     for (let client of $loggedinUser) {
-        isLogin = client.isLogin || false;
+        isLogin = client.isLogin;
     }
 
-    $: totalPrice = $cartList.reduce(
-        (acc, cur) => acc + cur.price * cur.amount,
-        0
-    );
+    $: totalPrice = $cartList
+        .reduce((acc, cur) => acc + cur.price * cur.amount, 0)
+        .toFixed(2);
 
     const deleteItem = (id) => {
         cartList.update((items) => items.filter((item) => item.id !== id));
@@ -143,7 +142,7 @@
         </div>
 
         <div class="flex flex-col text-center my-6 bottom-0">
-            <p class="text-xl mb-4">Total: ${totalPrice.toFixed(2)}</p>
+            <p class="text-xl mb-4">Total: ${totalPrice}</p>
 
             {#if !isLogin}
                 <p class="font-light">
