@@ -6,4 +6,8 @@
     let productCategory = $products;
 </script>
 
+<svelte:head>
+    <title>Razors Products</title>
+</svelte:head>
+
 <Card {title} {productCategory} />

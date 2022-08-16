@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>About Razors</title>
+</svelte:head>
+
 <div
     class="w-full max-w-[1300px] px-4 sm:px-6 md:px-12 m-auto text-justify mb-10"
 >
