@@ -1,5 +1,6 @@
 <script>
     import { products } from "../stores/products";
+    import Loading from "./Loading.svelte";
 
     export let title = "Featured Products";
 
@@ -26,6 +27,8 @@
                     <p class="font-semibold">${price}</p>
                 </div>
             </a>
+        {:else}
+            <Loading />
         {/each}
     </div>
 </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { fly, fade } from "svelte/transition";
+    import { fly } from "svelte/transition";
     import { cubicOut } from "svelte/easing";
 
     export let url: URL;
