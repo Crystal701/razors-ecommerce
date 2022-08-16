@@ -56,6 +56,10 @@
                 if (fullname !== "") {
                     console.log(response);
                     nameErr = "";
+
+                    cartList.update(() => []);
+                    goto("/");
+                    alert("Payment is successful!");
                 } else {
                     nameErr = "Please fill in your name";
                 }
@@ -115,7 +119,7 @@
             >
         </form>
     </SubmissionCard>
-{:else}
+{:else if totalPrice < 1}
     <SubmissionCard>
         <div class="flex flex-col gap-8 items-center">
             <h3>Your Cart is Empty.</h3>
