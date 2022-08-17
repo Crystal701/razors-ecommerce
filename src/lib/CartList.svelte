@@ -8,9 +8,7 @@
     import ChevronDown from "../icons/chevron-down.svelte";
     import { afterUpdate } from "svelte";
 
-    afterUpdate(() => {
-        setStorageCart($cartList);
-    });
+    afterUpdate(() => setStorageCart($cartList));
 
     let isLogin = false;
 

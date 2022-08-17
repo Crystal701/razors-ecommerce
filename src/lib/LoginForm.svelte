@@ -1,7 +1,10 @@
 <script>
     import SubmissionCard from "./SubmissionCard.svelte";
     import { users } from "../stores/users.js";
-    import { loggedinUser } from "../stores/loggedIn.js";
+    import { loggedinUser, setStorageUser } from "../stores/loggedIn.js";
+    import { afterUpdate } from "svelte";
+
+    afterUpdate(() => setStorageUser($loggedinUser));
 
     let email = "";
     let password = "";

@@ -68,7 +68,7 @@
                         class="navlink hover:cursor-pointer hover:border-black sm:hidden"
                         on:click={closeMenu}
                     >
-                        {#if user === 0}
+                        {#if !user}
                             Login
                         {:else}
                             Logout
@@ -86,7 +86,7 @@
                 href="/login"
                 class="hidden sm:inline-block navlink hover:cursor-pointer hover:border-black"
             >
-                {#if user === 0}
+                {#if !user}
                     Login
                 {:else}
                     Logout
