@@ -3,6 +3,9 @@
     import { flip } from "svelte/animate";
     import { cartList } from "../stores/cart.js";
     import { loggedinUser } from "../stores/loggedIn";
+    import CloseIcon from "../icons/close-icon.svelte";
+    import ChevronUp from "../icons/chevron-up.svelte";
+    import ChevronDown from "../icons/chevron-down.svelte";
 
     let isLogin = false;
 
@@ -59,22 +62,7 @@
         transition:fly={{ x: 100, duration: 500 }}
     >
         <div class="relative">
-            <button class="absolute" on:click>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                    />
-                </svg>
-            </button>
+            <CloseIcon on:click />
 
             <h3 class="text-center">Your Bag</h3>
         </div>
@@ -99,39 +87,13 @@
                     </div>
 
                     <div class="flex flex-col items-center">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-6 w-6 hover:cursor-pointer"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            on:click={() => addAmount(id)}
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M5 15l7-7 7 7"
-                            />
-                        </svg>
+                        <ChevronUp on:click={() => addAmount(id)} />
 
                         <span>{amount}</span>
 
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-6 w-6 hover:cursor-pointer"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
+                        <ChevronDown
                             on:click={() => reduceAmount(id, amount)}
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M19 9l-7 7-7-7"
-                            />
-                        </svg>
+                        />
                     </div>
                 </div>
             {:else}
