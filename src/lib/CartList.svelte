@@ -1,11 +1,16 @@
 <script>
     import { fade, fly } from "svelte/transition";
     import { flip } from "svelte/animate";
-    import { cartList } from "../stores/cart.js";
+    import { cartList, setStorageCart } from "../stores/cart.js";
     import { loggedinUser } from "../stores/loggedIn";
     import CloseIcon from "../icons/close-icon.svelte";
     import ChevronUp from "../icons/chevron-up.svelte";
     import ChevronDown from "../icons/chevron-down.svelte";
+    import { afterUpdate } from "svelte";
+
+    afterUpdate(() => {
+        setStorageCart($cartList);
+    });
 
     let isLogin = false;
 
