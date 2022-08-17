@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from "svelte";
     import { slide } from "svelte/transition";
     import MenuIcon from "../icons/menu-icon.svelte";
     import CartIcon from "../icons/cart-icon.svelte";
@@ -13,26 +12,22 @@
     $: productNum = $cartList.length;
     $: user = $loggedinUser.length;
 
-    const toggleMenu = () => {
-        menuOpen = !menuOpen;
+    const toggleMenu = () => (menuOpen = !menuOpen);
+
+    const closeMenu = () => (menuOpen = false);
+
+    const scrollEffect = () => {
+        closeMenu();
+
+        if (window.scrollY > 10) {
+            scrolling = true;
+        } else {
+            scrolling = false;
+        }
     };
-
-    onMount(() => {
-        window.addEventListener("resize", () => {
-            menuOpen = false;
-        });
-
-        window.addEventListener("scroll", () => {
-            menuOpen = false;
-
-            if (window.scrollY > 10) {
-                scrolling = true;
-            } else {
-                scrolling = false;
-            }
-        });
-    });
 </script>
+
+<svelte:window on:resize={closeMenu} on:scroll={scrollEffect} />
 
 <header
     class="sticky top-0 py-4 px-4 sm:px-6 md:px-12 flex justify-center z-50 w-full transition duration-500 bg-white"
@@ -52,26 +47,26 @@
                         sveltekit:prefetch
                         href="/"
                         class="navlink hover:cursor-pointer hover:border-black w-fit"
-                        on:click={() => (menuOpen = false)}>Home</a
+                        on:click={closeMenu}>Home</a
                     >
                     <a
                         sveltekit:prefetch
                         href="/products"
                         class="navlink hover:cursor-pointer hover:border-black w-fit"
-                        on:click={() => (menuOpen = false)}>Products</a
+                        on:click={closeMenu}>Products</a
                     >
                     <a
                         sveltekit:prefetch
                         href="/about"
                         class="navlink hover:cursor-pointer hover:border-black w-fit"
-                        on:click={() => (menuOpen = false)}>About</a
+                        on:click={closeMenu}>About</a
                     >
                     <hr class="sm:hidden" />
                     <a
                         sveltekit:prefetch
                         href="/login"
                         class="navlink hover:cursor-pointer hover:border-black w-fit sm:hidden"
-                        on:click={() => (menuOpen = false)}
+                        on:click={closeMenu}
                     >
                         {#if user === 0}
                             Login
