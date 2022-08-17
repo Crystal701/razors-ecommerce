@@ -9,7 +9,7 @@
     let menuOpen = false;
     let scrolling = false;
     let isCart = false;
-    $: productNum = $cartList.length;
+    $: productAmt = $cartList.reduce((acc, cur) => acc + cur.amount, 0);
     $: user = $loggedinUser.length;
 
     const toggleMenu = () => (menuOpen = !menuOpen);
@@ -46,26 +46,26 @@
                     <a
                         sveltekit:prefetch
                         href="/"
-                        class="navlink hover:cursor-pointer hover:border-black w-fit"
+                        class="navlink hover:cursor-pointer hover:border-black"
                         on:click={closeMenu}>Home</a
                     >
                     <a
                         sveltekit:prefetch
                         href="/products"
-                        class="navlink hover:cursor-pointer hover:border-black w-fit"
+                        class="navlink hover:cursor-pointer hover:border-black"
                         on:click={closeMenu}>Products</a
                     >
                     <a
                         sveltekit:prefetch
                         href="/about"
-                        class="navlink hover:cursor-pointer hover:border-black w-fit"
+                        class="navlink hover:cursor-pointer hover:border-black"
                         on:click={closeMenu}>About</a
                     >
                     <hr class="sm:hidden" />
                     <a
                         sveltekit:prefetch
                         href="/login"
-                        class="navlink hover:cursor-pointer hover:border-black w-fit sm:hidden"
+                        class="navlink hover:cursor-pointer hover:border-black sm:hidden"
                         on:click={closeMenu}
                     >
                         {#if user === 0}
@@ -95,11 +95,11 @@
             <div class="relative flex items-center">
                 <CartIcon on:click={() => (isCart = true)} />
 
-                {#if productNum > 0}
+                {#if productAmt > 0}
                     <div
-                        class="text-xs absolute top-[-8px] right-[-8px] bg-[#ba9761] border-0 rounded-full h-4 w-4 text-center text-white p-[1px]"
+                        class="text-xs absolute top-[-8px] right-[-8px] bg-[#ba9761] border-0 rounded-full h-4 min-w-[1rem] text-center text-white p-[1px]"
                     >
-                        {productNum}
+                        {productAmt}
                     </div>
                 {/if}
             </div>
