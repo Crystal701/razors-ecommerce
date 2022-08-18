@@ -1,6 +1,6 @@
 <script>
     import Card from "$lib/Card.svelte";
-    import { products } from "../../stores/products";
+    import { products } from "../../strapi/products";
 
     let title = "Our Products";
     let productCategory = $products;

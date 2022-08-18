@@ -1,10 +1,12 @@
 <script>
-    import { products } from "../stores/products";
+    import { products } from "../strapi/products";
     import Loading from "./Loading.svelte";
 
     export let title = "Featured Products";
 
-    const featuredProducts = $products.filter((item) => item.featured === true);
+    const featuredProducts = $products.filter(
+        (item) => item.attributes.featured === true
+    );
     export let productCategory = featuredProducts;
 </script>
 
@@ -17,17 +19,22 @@
         {#await productCategory}
             <Loading />
         {:then productCategory}
-            {#each productCategory as { id, title, image, price } (id)}
+            {#each productCategory as { id, attributes } (id)}
                 <a
                     sveltekit:prefetch
                     href="/products/{id}"
                     class="flex flex-col shadow-md bg-[rgba(255,255,255,0.1)] p-6 h-stretch border-t-4 border-[#ba9761] hover:border-black hover:shadow-xl transition duration-300"
                 >
-                    <img src={image.url} alt={title} class="my-4" />
+                    <img
+                        src="http://localhost:1337{attributes.image.data
+                            .attributes.url}"
+                        alt={attributes.title}
+                        class="my-4"
+                    />
 
                     <div class="flex flex-col justify-between h-full">
-                        <h4>{title}</h4>
-                        <p class="font-semibold">${price}</p>
+                        <h4>{attributes.title}</h4>
+                        <p class="font-semibold">${attributes.price}</p>
                     </div>
                 </a>
             {/each}
