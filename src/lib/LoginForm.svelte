@@ -1,85 +1,31 @@
 <script>
     import SubmissionCard from "./SubmissionCard.svelte";
-    import { users } from "../stores/users.js";
-    import { loggedinUser, setStorageUser } from "../stores/loggedIn.js";
+    import { userStore, setStorageUser, logout } from "../strapi/user";
     import { afterUpdate } from "svelte";
+    import loginUser from "../strapi/loginUser.js";
 
-    afterUpdate(() => setStorageUser($loggedinUser));
+    afterUpdate(() => setStorageUser($userStore));
+
+    $: user = $userStore.jwt;
 
     let email = "";
     let password = "";
-    let errorMsg = "";
-    let isLogin = false;
 
-    for (let client of $loggedinUser) {
-        isLogin = client.isLogin;
-    }
-
-    const handleSubmit = () => {
-        let isRegistered = false;
-        let registeredPwd = "";
-
-        for (let client of $users) {
-            if (email === client.email) {
-                isRegistered = true;
-                registeredPwd = client.password;
-            }
-        }
-
-        if (isRegistered) {
-            if (password === registeredPwd) {
-                errorMsg = "";
-                isLogin = true;
-
-                const newStatus = $users.map((user) => {
-                    if (email === user.email) {
-                        return { ...user, isLogin };
-                    } else {
-                        return { ...user };
-                    }
-                });
-
-                const loggedUser = newStatus.filter(
-                    (user) => user.email === email
-                );
-
-                users.update(() => newStatus);
-
-                loggedinUser.update(() => loggedUser);
-            } else {
-                errorMsg = "Wrong password";
-            }
-        } else {
-            errorMsg = "You're not registered. Please register to login.";
-        }
+    const handleSubmit = async () => {
+        await loginUser(email, password);
     };
 
     const handleLogout = () => {
-        isLogin = false;
-
-        for (let client of $loggedinUser) {
-            email = client.email;
-        }
-
-        const newStatus = $users.map((user) => {
-            if (email === user.email) {
-                return { ...user, isLogin };
-            } else {
-                return { ...user };
-            }
-        });
-
-        users.update(() => newStatus);
-
-        loggedinUser.update(() => []);
+        logout();
     };
 </script>
 
-{#if !isLogin}
+{#if !user}
     <SubmissionCard title={"Sign In"}>
         <form
             on:submit|preventDefault={handleSubmit}
             class="flex flex-col gap-3"
+            id="login-form"
         >
             <label for="email" class="font-extralight">Email</label>
             <input
@@ -98,11 +44,12 @@
                 bind:value={password}
                 required
             />
-            <p class="text-red-500">{errorMsg}</p>
 
-            <button class="button hover:bg-[#ba9761] hover:text-white"
-                >submit</button
+            <button
+                class="button hover:bg-[#ba9761] hover:text-white"
+                id="form-button">submit</button
             >
+
             <p class="font-light text-sm text-center">
                 Don't have an account? <span
                     class="text-[#ba9761] font-normal hover:underline hover:cursor-pointer"

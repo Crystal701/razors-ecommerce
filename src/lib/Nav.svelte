@@ -4,13 +4,13 @@
     import CartIcon from "../icons/cart-icon.svelte";
     import CartList from "$lib/CartList.svelte";
     import { cartList } from "../stores/cart.js";
-    import { loggedinUser } from "../stores/loggedIn.js";
+    import { userStore } from "../strapi/user.js";
 
     let menuOpen = false;
     let scrolling = false;
     let isCart = false;
     $: productAmt = $cartList.reduce((acc, cur) => acc + cur.amount, 0);
-    $: user = $loggedinUser.length;
+    $: user = $userStore.jwt;
 
     const toggleMenu = () => (menuOpen = !menuOpen);
 

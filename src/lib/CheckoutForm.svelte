@@ -1,13 +1,15 @@
 <script>
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
-    import { cartList } from "../stores/cart.js";
-    import { loggedinUser } from "../stores/loggedIn.js";
+    import { cartList, clearCart } from "../stores/cart.js";
+    import { userStore } from "../strapi/user";
     import SubmissionCard from "$lib/SubmissionCard.svelte";
 
     $: totalPrice = $cartList
         .reduce((acc, cur) => acc + cur.price * cur.amount, 0)
         .toFixed(2);
+
+    $: user = $userStore.jwt;
 
     let fullname = "";
     let nameErr = "";
@@ -18,13 +20,7 @@
     let elements;
 
     onMount(() => {
-        let isLogin = false;
-
-        for (let client of $loggedinUser) {
-            isLogin = client.isLogin;
-        }
-
-        if (!isLogin) {
+        if (!user) {
             goto("/");
         }
 
@@ -57,7 +53,7 @@
                     console.log(response);
                     nameErr = "";
 
-                    cartList.update(() => []);
+                    clearCart();
                     goto("/");
                     alert("Payment is successful!");
                 } else {

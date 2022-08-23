@@ -2,7 +2,7 @@
     import { fade, fly } from "svelte/transition";
     import { flip } from "svelte/animate";
     import { cartList, setStorageCart } from "../stores/cart.js";
-    import { loggedinUser } from "../stores/loggedIn";
+    import { userStore } from "../strapi/user.js";
     import CloseIcon from "../icons/close-icon.svelte";
     import ChevronUp from "../icons/chevron-up.svelte";
     import ChevronDown from "../icons/chevron-down.svelte";
@@ -10,11 +10,7 @@
 
     afterUpdate(() => setStorageCart($cartList));
 
-    let isLogin = false;
-
-    for (let client of $loggedinUser) {
-        isLogin = client.isLogin;
-    }
+    $: user = $userStore.jwt;
 
     $: totalPrice = $cartList
         .reduce((acc, cur) => acc + cur.price * cur.amount, 0)
@@ -109,7 +105,7 @@
         <div class="flex flex-col text-center my-6 bottom-0">
             <p class="text-xl mb-4">Total: ${totalPrice}</p>
 
-            {#if !isLogin}
+            {#if !user}
                 <p class="font-light">
                     Please <a
                         href="/login"

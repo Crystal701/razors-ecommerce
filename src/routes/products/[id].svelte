@@ -1,7 +1,9 @@
 <script context="module">
     export async function load({ fetch, params }) {
         const id = params.id;
-        const req = await fetch(`/products/${id}.json`);
+        const req = await fetch(
+            `http://localhost:1337/api/products/${id}?populate=*`
+        );
         const product = await req.json();
 
         if (req.ok) {
@@ -25,7 +27,8 @@
     export let product;
     let isCart = false;
 
-    const { id, title, price, description, image } = product;
+    const { id, attributes } = product.data;
+    const { title, description, price, image } = attributes;
 
     const addToCart = (id, title, price, image) => {
         let isExist = false;
@@ -69,7 +72,11 @@
     <div
         class="flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-20"
     >
-        <img src={image.url} alt={title} class="w-1/2" />
+        <img
+            src={`http://localhost:1337${image.data.attributes.url}`}
+            alt={title}
+            class="w-1/2"
+        />
 
         <div class="flex flex-col gap-4 min-w-[300px]">
             <h3 class="font-secondary text-2xl">{title}</h3>
@@ -77,8 +84,13 @@
             <p class="text-justify font-extralight">{description}</p>
             <button
                 class="button hover:bg-[#ba9761] hover:text-white"
-                on:click={() => addToCart(id, title, price, image.url)}
-                >add to cart</button
+                on:click={() =>
+                    addToCart(
+                        id,
+                        title,
+                        price,
+                        `http://localhost:1337${image.data.attributes.url}`
+                    )}>add to cart</button
             >
         </div>
     </div>
