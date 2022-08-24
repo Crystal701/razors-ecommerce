@@ -72,11 +72,7 @@
     <div
         class="flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-20"
     >
-        <img
-            src={`http://localhost:1337${image.data.attributes.url}`}
-            alt={title}
-            class="w-1/2"
-        />
+        <img src={image.data.attributes.url} alt={title} class="w-1/2" />
 
         <div class="flex flex-col gap-4 min-w-[300px]">
             <h3 class="font-secondary text-2xl">{title}</h3>

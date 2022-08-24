@@ -24,8 +24,7 @@
                     class="flex flex-col shadow-md bg-[rgba(255,255,255,0.1)] p-6 h-stretch border-t-4 border-[#ba9761] hover:border-black hover:shadow-xl transition duration-300"
                 >
                     <img
-                        src="http://localhost:1337{attributes.image.data
-                            .attributes.url}"
+                        src={attributes.image.data.attributes.url}
                         alt={attributes.title}
                         class="my-4"
                     />
