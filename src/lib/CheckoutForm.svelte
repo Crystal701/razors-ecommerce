@@ -1,9 +1,11 @@
 <script>
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
-    import { cartList, clearCart } from "../stores/cart.js";
+    import { cartList } from "../stores/cart.js";
     import { userStore } from "../strapi/user";
     import SubmissionCard from "$lib/SubmissionCard.svelte";
+    import submitOrder from "../strapi/submitOrder.js";
+    import Loading from "./Loading.svelte";
 
     $: totalPrice = $cartList
         .reduce((acc, cur) => acc + cur.price * cur.amount, 0)
@@ -18,6 +20,7 @@
     let card;
     let stripe;
     let elements;
+    let promise;
 
     onMount(() => {
         if (!user) {
@@ -50,12 +53,16 @@
 
             if (token) {
                 if (fullname !== "") {
-                    console.log(response);
-                    nameErr = "";
+                    const { id } = token;
+                    promise = submitOrder(
+                        fullname,
+                        totalPrice,
+                        $cartList,
+                        id,
+                        user
+                    );
 
-                    clearCart();
-                    goto("/");
-                    alert("Payment is successful!");
+                    nameErr = "";
                 } else {
                     nameErr = "Please fill in your name";
                 }
@@ -67,6 +74,10 @@
         }
     }
 </script>
+
+{#await promise}
+    <Loading />
+{/await}
 
 {#if totalPrice > 0}
     <SubmissionCard title={"Checkout"}>
