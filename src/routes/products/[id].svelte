@@ -81,12 +81,8 @@
             <button
                 class="button hover:bg-[#ba9761] hover:text-white"
                 on:click={() =>
-                    addToCart(
-                        id,
-                        title,
-                        price,
-                        `http://localhost:1337${image.data.attributes.url}`
-                    )}>add to cart</button
+                    addToCart(id, title, price, image.data.attributes.url)}
+                >add to cart</button
             >
         </div>
     </div>
