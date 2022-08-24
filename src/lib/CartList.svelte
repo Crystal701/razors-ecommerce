@@ -12,9 +12,11 @@
 
     $: user = $userStore.jwt;
 
-    $: totalPrice = $cartList
-        .reduce((acc, cur) => acc + cur.price * cur.amount, 0)
-        .toFixed(2);
+    $: totalPrice = parseFloat(
+        $cartList
+            .reduce((acc, cur) => acc + cur.price * cur.amount, 0)
+            .toFixed(2)
+    );
 
     const deleteItem = (id) => {
         cartList.update((items) => items.filter((item) => item.id !== id));

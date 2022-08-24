@@ -16,9 +16,7 @@
     <h3 class="font-secondary text-2xl">{title}</h3>
 
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 my-10 h-full">
-        {#await productCategory}
-            <Loading />
-        {:then productCategory}
+        {#if productCategory}
             {#each productCategory as { id, attributes } (id)}
                 <a
                     sveltekit:prefetch
@@ -38,6 +36,10 @@
                     </div>
                 </a>
             {/each}
-        {/await}
+        {:else}
+            {#await productCategory}
+                <Loading />
+            {/await}
+        {/if}
     </div>
 </div>

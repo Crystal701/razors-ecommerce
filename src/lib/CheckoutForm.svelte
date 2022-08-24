@@ -7,9 +7,11 @@
     import submitOrder from "../strapi/submitOrder.js";
     import Loading from "./Loading.svelte";
 
-    $: totalPrice = $cartList
-        .reduce((acc, cur) => acc + cur.price * cur.amount, 0)
-        .toFixed(2);
+    $: totalPrice = parseFloat(
+        $cartList
+            .reduce((acc, cur) => acc + cur.price * cur.amount, 0)
+            .toFixed(2)
+    );
 
     $: user = $userStore.jwt;
 
@@ -75,10 +77,6 @@
     }
 </script>
 
-{#await promise}
-    <Loading />
-{/await}
-
 {#if totalPrice > 0}
     <SubmissionCard title={"Checkout"}>
         <form
@@ -121,9 +119,15 @@
                 </div>
             </div>
 
-            <button class="button hover:bg-[#ba9761] hover:text-white"
-                >pay now</button
-            >
+            {#if promise}
+                {#await promise}
+                    <Loading />
+                {/await}
+            {:else}
+                <button class="button hover:bg-[#ba9761] hover:text-white"
+                    >pay now</button
+                >
+            {/if}
         </form>
     </SubmissionCard>
 {:else if totalPrice < 1}
