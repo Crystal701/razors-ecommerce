@@ -4,7 +4,7 @@ import { goto } from "$app/navigation";
 
 async function submitOrder(name, cartTotal, items, stripeTokenId, userToken) {
     await axios
-        .post("http://localhost:1337/api/orders", {
+        .post("https://razor-ecommerce-server.herokuapp.com/api/orders", {
             data: {
                 name,
                 cartTotal,

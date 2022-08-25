@@ -2,7 +2,7 @@
     export async function load({ fetch, params }) {
         const id = params.id;
         const req = await fetch(
-            `http://localhost:1337/api/products/${id}?populate=*`
+            `https://razor-ecommerce-server.herokuapp.com/api/products/${id}?populate=*`
         );
         const product = await req.json();
 

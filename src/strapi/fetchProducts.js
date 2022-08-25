@@ -1,5 +1,5 @@
 export default async function () {
-    const req = await fetch("http://localhost:1337/api/products?populate=*");
+    const req = await fetch("https://razor-ecommerce-server.herokuapp.com/api/products?populate=*");
     const fetchProducts = await req.json();
     const strapiProducts = fetchProducts.data;
 

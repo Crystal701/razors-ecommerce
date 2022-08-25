@@ -7,7 +7,7 @@ async function registerUser(email, password, username) {
     error?.remove();
 
     await axios
-        .post("http://localhost:1337/api/auth/local/register", {
+        .post("https://razor-ecommerce-server.herokuapp.com/api/auth/local/register", {
             email,
             password,
             username

@@ -6,7 +6,7 @@ async function loginUser(email, password) {
     error?.remove();
 
     await axios
-        .post("http://localhost:1337/api/auth/local", {
+        .post("https://razor-ecommerce-server.herokuapp.com/api/auth/local", {
             identifier: email,
             password
         })
