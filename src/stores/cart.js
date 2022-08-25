@@ -15,5 +15,5 @@ export function setStorageCart(cartValues) {
 
 export function clearCart() {
     cartList.set([]);
-    localStorage.removeItem("cartList");
+    localStorage.clear();
 }
